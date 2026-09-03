@@ -1,0 +1,14 @@
+{
+  "cookies": [],
+  "origins": [
+    {
+      "origin": "http://localhost:5173",
+      "localStorage": [
+        {
+          "name": "auth",
+          "value": "{\"state\":{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2YjVhOWMwMi04ZjBlLTQ4ZDEtYmFiYS05Mjk5NTUxOTgxYTIiLCJleHAiOjE3ODkwMjU2NjZ9.8uVftf6qEMS4JRqQYn9BcuViGAtZDzJeOzc3KTVApQQ\",\"user\":{\"id\":\"6b5a9c02-8f0e-48d1-baba-9299551981a2\",\"email\":\"e2e.test@runssistant.io\",\"name\":\"E2E Tester\",\"location\":\"\",\"created_at\":\"2026-09-03T07:02:18.095864Z\"}},\"version\":0}"
+        }
+      ]
+    }
+  ]
+}
