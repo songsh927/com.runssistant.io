@@ -45,3 +45,64 @@ export type LoginFormValues = z.infer<typeof loginSchema>
 export type SignupFormValues = z.infer<typeof signupSchema>
 export type RunFormValues = z.infer<typeof runFormSchema>
 export type GoalFormValues = z.infer<typeof goalFormSchema>
+
+// ─── Onboarding / Profile schemas ───────────────────────────────────────────
+
+import type { OnboardingState } from '@/types/profile'
+
+export const experienceSchema = z.object({
+  level: z.enum(['beginner', 'novice', 'intermediate', 'advanced']),
+  runs_per_week: z.number().int().min(1).max(7),
+  longest_distance: z.enum(['under_5km', '5_10km', '10_21km', 'half_plus']),
+})
+
+export const trainingSchema = z.object({
+  preferred_types: z
+    .array(z.enum(['easy', 'tempo', 'interval', 'long_run', 'race', 'recovery']))
+    .min(1, '최소 1개 선택'),
+  available_days: z.array(z.string()).min(1, '최소 1일 선택'),
+  time_per_session: z.enum(['under_30min', '30_60min', '60_90min', 'unlimited']),
+})
+
+const injuryStatusSchema = z.object({
+  knee: z.enum(['none', 'mild', 'caution', 'severe']),
+  ankle: z.enum(['none', 'mild', 'caution', 'severe']),
+  achilles: z.enum(['none', 'mild', 'caution', 'severe']),
+  shin: z.enum(['none', 'mild', 'caution', 'severe']),
+  hip_back: z.enum(['none', 'mild', 'caution', 'severe']),
+  plantar_fascia: z.enum(['none', 'mild', 'caution', 'severe']),
+})
+
+export const injurySchema = z.object({
+  status: injuryStatusSchema,
+  history: z.string().max(500).optional().nullable(),
+})
+
+export const runnerProfileSchema = z.object({
+  experience: experienceSchema,
+  training: trainingSchema,
+  cross_training: z.array(z.enum(['weight', 'swimming', 'cycling', 'yoga', 'boxing', 'hiking'])),
+  injuries: injurySchema,
+})
+
+export function validateStep(state: OnboardingState): boolean {
+  switch (state.step) {
+    case 0:
+      return experienceSchema.safeParse(state.experience).success
+    case 1:
+      return trainingSchema.safeParse(state.training).success
+    case 2:
+      return true
+    case 3:
+      return true
+    case 4:
+      return runnerProfileSchema.safeParse({
+        experience: state.experience,
+        training: state.training,
+        cross_training: state.cross_training,
+        injuries: state.injuries,
+      }).success
+    default:
+      return false
+  }
+}

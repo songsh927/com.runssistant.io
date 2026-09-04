@@ -3,6 +3,8 @@ export interface User {
   name: string
   email: string
   location: string | null
+  created_at: string
+  onboarding_completed: boolean
 }
 
 export interface TokenResponse {

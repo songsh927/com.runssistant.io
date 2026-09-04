@@ -18,6 +18,16 @@ const apiClient = ky.create({
           useAuthStore.getState().logout()
           window.location.href = '/login'
         }
+
+        if (response.status === 403) {
+          const body = await response
+            .clone()
+            .json()
+            .catch(() => null)
+          if (body?.error?.code === 'ONBOARDING_REQUIRED' || body?.code === 'ONBOARDING_REQUIRED') {
+            window.location.href = '/onboarding'
+          }
+        }
       },
     ],
   },

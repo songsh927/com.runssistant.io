@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom'
+import PaceTrend from '@/components/dashboard/PaceTrend'
+import PersonalBests from '@/components/dashboard/PersonalBests'
+import VolumeTrend from '@/components/dashboard/VolumeTrend'
 import WeeklyCalendar from '@/components/dashboard/WeeklyCalendar'
 import WeeklyProgress from '@/components/dashboard/WeeklyProgress'
 import RunCard from '@/components/run/RunCard'
@@ -42,6 +45,10 @@ export default function HomePage() {
           ))}
         </section>
       )}
+
+      <VolumeTrend />
+      <PaceTrend />
+      <PersonalBests />
 
       <Link
         to="/runs/new"
