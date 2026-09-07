@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 const backendUrl = 'http://localhost:8000'
-const proxyPaths = ['/auth', '/runs', '/stats', '/goals', '/plans', '/coach']
+const proxyPaths = ['/auth', '/users', '/runs', '/stats', '/goals', '/plans', '/coach']
 
 export default defineConfig({
   plugins: [
@@ -28,7 +28,7 @@ export default defineConfig({
       workbox: {
         runtimeCaching: [
           {
-            urlPattern: /^\/(auth|runs|stats|goals|plans|coach)(\/.*)?$/,
+            urlPattern: /^\/(auth|users|runs|stats|goals|plans|coach)(\/.*)?$/,
             handler: 'NetworkFirst',
             options: {
               cacheName: 'api-cache',
